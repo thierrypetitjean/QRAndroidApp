@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">QR Registration</string>
+    <string name="wrong_code">You scanned a wrong code!</string>
+    <string name="no_user">User not signed in</string>
+    <string name="no_permission">Permission Denied</string>
+    <string name="permission_granted">Permission Granted</string>
+    <string name="qr_validate">Your in now!</string>
+    <string name="login_failed">Login failed! Please try again later</string>
+    <string name="login_success">Login successful!</string>
+    <string name="enter_email">Please enter email...</string>
+    <string name="enter_password">Please enter password!</string>
+    <string name="registration_failed">Registration failed! Please try again later</string>
+    <string name="registration_success">Registration successful!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

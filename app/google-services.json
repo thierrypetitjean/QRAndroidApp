@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "139755880700",
+    "firebase_url": "https://qrregistration-ea693.firebaseio.com",
+    "project_id": "qrregistration-ea693",
+    "storage_bucket": "qrregistration-ea693.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139755880700:android:e078dff486bc8ed2085779",
+        "android_client_info": {
+          "package_name": "com.example.qrregistration"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139755880700-la1962ioj5hmhq6dvubfud365t8komdi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgbYkF1z3pX1mZ4XyF4Nz0RA-_TMyhBUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "139755880700-la1962ioj5hmhq6dvubfud365t8komdi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/RegisterUserFragment">
+
+    <fragment
+        android:id="@+id/RegisterUserFragment"
+        android:name="com.example.qrregistration.view.LoginRegisterFragment"
+        android:label="LoginRegisterUserFragment">
+        <action
+            android:id="@+id/action_loginRegisterFragment_to_registerTodayFragment2"
+            app:destination="@id/registerTodayFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_loginRegisterFragment_to_registerUserFragment"
+            app:destination="@id/registerUserFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/loggedInFragment"
+        android:name="com.example.qrregistration.view.SuccesFragment"
+        android:label="LoggedInFragment">
+        <action
+            android:id="@+id/action_loggedInFragment_to_loginRegisterFragment"
+            app:destination="@id/RegisterUserFragment"
+            app:popExitAnim="@anim/slide_in_left" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerTodayFragment"
+        android:name="com.example.qrregistration.view.RegisterTodayFragment"
+        android:label="RegisterTodayFragment" >
+        <action
+            android:id="@+id/action_registerTodayFragment_to_loggedInFragment"
+            app:destination="@id/loggedInFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/loggedInFragment">
+            <argument
+                android:name="date"
+                android:defaultValue="02-22-22" />
+        </action>
+        <action
+            android:id="@+id/action_registerTodayFragment_to_RegisterUserFragment"
+            app:destination="@id/RegisterUserFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerUserFragment"
+        android:name="com.example.qrregistration.view.RegisterUserFragment"
+        android:label="RegisterUserFragment" >
+        <action
+            android:id="@+id/action_registerUserFragment_to_RegisterUserFragment"
+            app:destination="@id/RegisterUserFragment"
+            app:popUpTo="@id/loggedInFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left" />
+    </fragment>
+</navigation>
