@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
-    app:startDestination="@id/RegisterUserFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/AskPermissionFragment">
 
+    <fragment
+        android:id="@+id/AskPermissionFragment"
+        android:name="com.example.qrregistration.view.AskPermissionFragment"
+        android:label="AskPermissionFragment"
+        tools:layout="@layout/fragment_ask_permission">
+        <action
+            android:id="@+id/action_askPermissionFragment_to_loginRegisterFragment"
+            app:destination="@id/RegisterUserFragment"
+            app:popExitAnim="@anim/slide_in_left" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/RegisterUserFragment"
         android:name="com.example.qrregistration.view.LoginRegisterFragment"
@@ -27,7 +42,7 @@
         android:name="com.example.qrregistration.view.SuccesFragment"
         android:label="LoggedInFragment">
         <action
-            android:id="@+id/action_loggedInFragment_to_loginRegisterFragment"
+            android:id="@+id/action_askPermissionFragment_to_loginRegisterFragment"
             app:destination="@id/RegisterUserFragment"
             app:popExitAnim="@anim/slide_in_left" />
         <argument

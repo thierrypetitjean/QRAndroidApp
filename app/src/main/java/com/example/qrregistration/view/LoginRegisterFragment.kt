@@ -55,7 +55,7 @@ class LoginRegisterFragment : Fragment() {
                 ).show()
             }
         })
-        registerButton!!.setOnClickListener{
+        registerButton!!.setOnClickListener {
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_loginRegisterFragment_to_registerUserFragment)
         }

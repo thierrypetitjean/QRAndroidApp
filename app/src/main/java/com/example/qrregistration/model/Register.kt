@@ -8,7 +8,9 @@ data class Register(
     var author: String? = "",
     var email: String? = "",
     var register_date: String? = "",
-    var register_time: String? = ""
+    var register_time: String? = "",
+    var lat: String? = "",
+    var long: String? = ""
 ) {
 
     @Exclude
@@ -17,7 +19,9 @@ data class Register(
             "author" to author,
             "email" to email,
             "register_date" to register_date,
-            "register_time" to register_time
+            "register_time" to register_time,
+            "latitude" to lat,
+            "longitude" to long
         )
     }
 }

@@ -19,9 +19,14 @@ class AuthAppRepository(private val application: Application) {
     val userLiveData: MutableLiveData<FirebaseUser?>
     val alreadyLoggedInToday: MutableLiveData<Boolean>
     val loggedOutLiveData: MutableLiveData<Boolean>
+    val hasLocPermission: MutableLiveData<Boolean>
+    val hasCamPermission: MutableLiveData<Boolean>
+    val hasSendQR: MutableLiveData<Boolean>
 
     var currentDate: String? = null
     var currentTime: String? = null
+    var locLat: Double? = null
+    var locLong: Double? = null
 
     init {
         firebaseAuth = FirebaseAuth.getInstance()
@@ -29,10 +34,21 @@ class AuthAppRepository(private val application: Application) {
         userLiveData = MutableLiveData()
         alreadyLoggedInToday = MutableLiveData()
         loggedOutLiveData = MutableLiveData()
+        hasLocPermission = MutableLiveData()
+        hasCamPermission = MutableLiveData()
+        hasSendQR = MutableLiveData()
         if (firebaseAuth.currentUser != null) {
             userLiveData.postValue(firebaseAuth.currentUser)
             loggedOutLiveData.postValue(false)
         }
+    }
+
+    fun setLocPermission(hasLocPer: Boolean) {
+        hasLocPermission.postValue(hasLocPer)
+    }
+
+    fun setCamPermission(hasCamPer: Boolean) {
+        hasCamPermission.postValue(hasCamPer)
     }
 
     fun login(email: String, password: String) {
@@ -40,9 +56,7 @@ class AuthAppRepository(private val application: Application) {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     userLiveData.postValue(firebaseAuth.currentUser)
-                }
-                else
-                {
+                } else {
                     Toast.makeText(
                         application.applicationContext,
                         "Login Failure: " + task.exception!!.message,
@@ -80,7 +94,14 @@ class AuthAppRepository(private val application: Application) {
     }
 
 
-    fun registerToday(username: String, email: String, date: String, time: String) {
+    fun registerToday(
+        username: String,
+        email: String,
+        date: String,
+        time: String,
+        lat: String,
+        long: String
+    ) {
 
         val key = firebaseDatabase.getReference().child("aanmeldingen").push().key
         if (key == null) {
@@ -88,7 +109,7 @@ class AuthAppRepository(private val application: Application) {
             return
         }
 
-        val register = Register(username, email, date, time)
+        val register = Register(username, email, date, time, lat, long)
         val postValues = register.toMap()
 
         val childUpdates = hashMapOf<String, Any>(
@@ -98,23 +119,26 @@ class AuthAppRepository(private val application: Application) {
         firebaseDatabase.getReference().updateChildren(childUpdates)
             .addOnSuccessListener {
                 // Write was successful!
-                Log.d("test","write succesfull ")
+                Log.d("test", "write succesfull ")
                 currentDate = date
                 currentTime = time
+                hasSendQR.postValue(true)
 
             }
             .addOnFailureListener {
                 // Write failed
-                Log.d("test","error = " + it.localizedMessage)
+                Log.d("test", "error = " + it.localizedMessage)
+                hasSendQR.postValue(false)
             }
 
     }
 
-    fun checkToday(date: String)
-    {
+    fun checkToday(date: String) {
         // Read from the database
-        val myMostViewedPostsQuery = firebaseDatabase.getReference().child("aanmeldingen-" + date).child(
-            firebaseAuth.currentUser!!.displayName!!)
+        val myMostViewedPostsQuery =
+            firebaseDatabase.getReference().child("aanmeldingen-" + date).child(
+                firebaseAuth.currentUser!!.displayName!!
+            )
         myMostViewedPostsQuery.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
@@ -122,13 +146,12 @@ class AuthAppRepository(private val application: Application) {
 
                 val dateToday = dataSnapshot.child("register_date").value
                 val time = dataSnapshot.child("register_time").value
-                if(dateToday != null && time != null) {
+                if (dateToday != null && time != null) {
                     Log.d("test", "Already registered today : $dateToday " + " $time")
                     currentDate = date
                     currentTime = time.toString()
                     alreadyLoggedInToday.postValue(true)
-                }else
-                {
+                } else {
                     currentDate = ""
                     currentTime = ""
                     Log.d("test", "Not registered today")
@@ -149,5 +172,4 @@ class AuthAppRepository(private val application: Application) {
         firebaseAuth.signOut()
         loggedOutLiveData.postValue(true)
     }
-
 }

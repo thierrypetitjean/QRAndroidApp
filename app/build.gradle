@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.qrregistration"
-        minSdkVersion 22
+        minSdkVersion 24
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
@@ -55,6 +55,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.4.0'
 
     implementation 'com.airbnb.android:lottie:4.2.2'
-    
+
+    implementation "com.google.android.gms:play-services-location:18.0.0"
+
+
 
 }
